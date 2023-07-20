@@ -1,7 +1,7 @@
 const sharp = require("sharp");
 
 function compress(input, webp, grayscale, quality, originSize, metadata) {
-	let format = webp ? "webp" : "jpeg";
+	let format = webp ? 'webp' : 'jpeg';
 	const imgWidth = metadata.width;
 	const imgHeight = metadata.height;
 	let compressionQuality = quality;
@@ -15,7 +15,7 @@ if (imgWidth >= 16383 || imgHeight >= 16383) {
 } else if (imgWidth <= 8704 && imgHeight <= 8704) {
   format = 'avif';
   compressionQuality *= 2.0;
-  effortCPU = 2;
+  effortCPU = 0;
 } else if (imgWidth <= 16383 || imgHeight <= 16383) {
   format = 'webp';
   compressionQuality *= 0.5;
