@@ -14,8 +14,8 @@ if (imgWidth >= 16383 || imgHeight >= 16383) {
   effortCPU = 0;
 } else if (imgWidth <= 8704 && imgHeight <= 8704) {
   format = 'avif';
-  compressionQuality *= 1.5;
-  effortCPU = 0;
+  compressionQuality *= 2.0;
+  effortCPU = 2;
 } else if (imgWidth <= 16383 || imgHeight <= 16383) {
   format = 'webp';
   compressionQuality *= 0.5;
