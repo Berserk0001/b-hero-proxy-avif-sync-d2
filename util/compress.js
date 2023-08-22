@@ -1,4 +1,4 @@
-const sharp = require("sharp");
+const sharp = require("sharp")
 
 function compress(input, webp, grayscale, quality, originSize, metadata) {
 	let format = webp ? 'webp' : 'jpeg'
@@ -10,11 +10,11 @@ function compress(input, webp, grayscale, quality, originSize, metadata) {
 	let effortCPU = 4
 
 	//workaround for webp max res limit && experimental avif compression
-	if (imgWidth >= 16383 || imgHeight >= 16383) {
+	if (imgHeight >= 16383) {	//damn longstrip image
 	  format = 'webp'
 	  compressionQuality *= 0.5
 	  resizeHeight = 15383
-	  effortCPU = 2
+	  effortCPU = 4
 	} else /*if (imgWidth <= 8704 && imgHeight <= 8704)*/ {
 	  format = 'webp'
 	  compressionQuality *= 0.1
@@ -25,7 +25,7 @@ function compress(input, webp, grayscale, quality, originSize, metadata) {
 	  effortCPU = 6
 	}; */
 	
-        quality = Math.ceil(compressionQuality)
+        //quality = Math.ceil(compressionQuality)
 	
 	return sharp(input)
 		.resize({
