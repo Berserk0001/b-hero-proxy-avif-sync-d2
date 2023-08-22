@@ -1,34 +1,40 @@
 const sharp = require("sharp");
 
 function compress(input, webp, grayscale, quality, originSize, metadata) {
-	let format = webp ? 'webp' : 'jpeg';
-	const imgWidth = metadata.width;
-	const imgHeight = metadata.height;
-	let compressionQuality = quality;
-	let effortCPU = 1;
+	let format = webp ? 'webp' : 'jpeg'
+	const imgWidth = metadata.width
+	const imgHeight = metadata.height
+	let compressionQuality = quality
+	let resizeWidth = null
+	let resizeHeight = null
+	let effortCPU = 4
 
 	//workaround for webp max res limit && experimental avif compression
-if (imgWidth >= 16383 || imgHeight >= 16383) {
-  format = 'jpeg';
-  compressionQuality *= 1.7;
-  effortCPU = 0;
-} else /*if (imgWidth <= 8704 && imgHeight <= 8704)*/ {
-  format = 'avif';
-  compressionQuality *= 1.3;
-  effortCPU = 2;
-} /*else if (imgWidth <= 16383 || imgHeight <= 16383) {
-  format = 'webp';
-  compressionQuality *= 0.5;
-  effortCPU = 6;
-} */
+	if (imgWidth >= 16383 || imgHeight >= 16383) {
+	  format = 'webp'
+	  compressionQuality *= 0.5
+	  resizeHeight = 15383
+	  effortCPU = 2
+	} else /*if (imgWidth <= 8704 && imgHeight <= 8704)*/ {
+	  format = 'webp'
+	  compressionQuality *= 0.1
+	  effortCPU = 6
+	}; /*else if (imgWidth <= 16383 || imgHeight <= 16383) {
+	  format = 'webp'
+	  compressionQuality *= 0.5
+	  effortCPU = 6
+	}; */
 	
         quality = Math.ceil(compressionQuality)
 	
 	return sharp(input)
+		.resize({
+			width: resizeWidth,
+			height: resizeHeight
+		})
 		.grayscale(grayscale)
 		.toFormat(format, {
 			quality: quality,
-			mozjpeg: true,
 			effort: effortCPU
 		})
 		.toBuffer({resolveWithObject: true})
