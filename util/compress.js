@@ -7,7 +7,7 @@ function compress(input, webp, grayscale, quality, originSize, metadata) {
 	let compressionQuality = quality
 	let resizeWidth = null
 	let resizeHeight = null
-	let effortCPU = 4
+	let effortCPU = 6
 
 	//workaround for webp max res limit && experimental avif compression
 	if (imgHeight >= 9383) {	//damn longstrip image
@@ -34,7 +34,7 @@ function compress(input, webp, grayscale, quality, originSize, metadata) {
 		})
 		.grayscale(grayscale)
 		.toFormat(format, {
-			quality: quality,
+			quality: compressionQuality,
 			preset: 'picture',
 			effort: effortCPU
 		})
