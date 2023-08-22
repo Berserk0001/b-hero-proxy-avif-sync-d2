@@ -5,22 +5,22 @@ function compress(input, webp, grayscale, quality, originSize, metadata) {
 	const imgWidth = metadata.width;
 	const imgHeight = metadata.height;
 	let compressionQuality = quality;
-	let effortCPU = 0;
+	let effortCPU = 1;
 
 	//workaround for webp max res limit && experimental avif compression
 if (imgWidth >= 16383 || imgHeight >= 16383) {
   format = 'jpeg';
-  compressionQuality *= 2.5;
+  compressionQuality *= 1.7;
   effortCPU = 0;
-} else if (imgWidth <= 8704 && imgHeight <= 8704) {
+} else /*if (imgWidth <= 8704 && imgHeight <= 8704)*/ {
   format = 'avif';
-  compressionQuality *= 1.5;
-  effortCPU = 1;
-} else if (imgWidth <= 16383 || imgHeight <= 16383) {
+  compressionQuality *= 1.3;
+  effortCPU = 2;
+} /*else if (imgWidth <= 16383 || imgHeight <= 16383) {
   format = 'webp';
   compressionQuality *= 0.5;
   effortCPU = 6;
-}
+} */
 	
         quality = Math.ceil(compressionQuality)
 	
