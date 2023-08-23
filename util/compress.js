@@ -15,15 +15,21 @@ function compress(input, webp, grayscale, quality, originSize, metadata) {
 	  compressionQuality *= 0.5
 	  resizeHeight = 12480
 	  effortCPU = 6
-	} else /*if (imgWidth <= 8704 && imgHeight <= 8704)*/ {
+	} else if (imgWidth > 1280 && imgHeight < 9360) {
+	  format = 'webp'
+	  compressionQuality *= 0.5
+	  resizeWidth = 960
+	  effortCPU = 6
+	} else if (imgWidth > 960 && imgHeight < 2880) {
+	  format = 'webp'
+	  compressionQuality *= 0.5
+	  resizeWidth = 864
+	  effortCPU = 6
+	} else {
 	  format = 'webp'
 	  compressionQuality *= 0.5
 	  effortCPU = 6
-	} /*else if (imgWidth <= 16383 || imgHeight <= 16383) {
-	  format = 'webp'
-	  compressionQuality *= 0.5
-	  effortCPU = 6
-	}; */
+	}
 	
         //quality = Math.ceil(compressionQuality)
 	
