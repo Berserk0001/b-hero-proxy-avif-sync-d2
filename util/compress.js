@@ -10,16 +10,16 @@ function compress(input, webp, grayscale, quality, originSize, metadata) {
 	let effortCPU = 6
 
 	//workaround for webp max res limit && experimental avif compression
-	if (imgHeight >= 9393) {	//damn longstrip image
+	if (imgHeight >= 12480) {	//damn longstrip image
 	  format = 'webp'
-	  compressionQuality *= 0.1
-	  resizeHeight = 9393
+	  compressionQuality *= 0.5
+	  resizeHeight = 12480
 	  effortCPU = 6
 	} else /*if (imgWidth <= 8704 && imgHeight <= 8704)*/ {
 	  format = 'webp'
-	  compressionQuality *= 0.1
+	  compressionQuality *= 0.5
 	  effortCPU = 6
-	}; /*else if (imgWidth <= 16383 || imgHeight <= 16383) {
+	} /*else if (imgWidth <= 16383 || imgHeight <= 16383) {
 	  format = 'webp'
 	  compressionQuality *= 0.5
 	  effortCPU = 6
