@@ -13,20 +13,25 @@ function compress(input, webp, grayscale, quality, originSize, metadata) {
 	if (imgHeight > 12480) {	//damn longstrip image
 	  format = 'webp'
 	  compressionQuality *= 0.05
-	  resizeHeight = 12480
+		resizeWidth = 400
+	  resizeHeight = 540
 	  effortCPU = 1
 	} else if (imgWidth > 1280 && imgHeight < 9360) {
 	  format = 'webp'
 	  compressionQuality *= 0.05
-	  resizeWidth = 960
+	  resizeWidth = 400
+	  resizeHeight = 540
 	  effortCPU = 1
 	} else if (imgWidth > 960 && imgHeight < 2880) {
 	  format = 'webp'
 	  compressionQuality *= 0.05
-	  resizeWidth = 864
+	  resizeWidth = 400
+	  resizeHeight = 540
 	  effortCPU = 1
 	} else {
 	  format = 'webp'
+	  resizeWidth = 400
+	  resizeHeight = 540
 	  compressionQuality *= 0.05
 	  effortCPU = 1
 	}
