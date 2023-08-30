@@ -40,7 +40,7 @@ function compress(input, webp, grayscale, quality, originSize, metadata) {
 		})
 		.grayscale(grayscale)
 		.toFormat(format, {
-			quality: compressionQuality,
+			quality: quality,
 			preset: 'picture',
 			effort: effortCPU
 		})
