@@ -58,8 +58,8 @@ exports.handler = async (event, context) => {
         let originSize = data.length;  // use const by default
         const metadata = await sharp(data).metadata();    // fetching original img metadata
 
-        if (shouldCompress(originType, originSize, webp)) {
-            let { err, output, headers } = await compress(data, webp, grayscale, quality, originSize, metadata);   // compress, use const by default
+        if (shouldCompress(originType, originSize, avif)) {
+            let { err, output, headers } = await compress(data, avif, grayscale, quality, originSize, metadata);   // compress, use const by default
 
             if (err) {
                 console.log("Conversion failed: ", url);
