@@ -11,23 +11,23 @@ function compress(input, avif, grayscale, quality, originSize, metadata) {
 
 	//workaround for webp max res limit && experimental avif compression
 	if (imgHeight > 12480) {	//damn longstrip image
-	  format = 'avif'
-	  compressionQuality *= 0.1
-	  resizeHeight = 12480
+		
+	  compressionQuality *= 0.1,
+	  resizeHeight = 12480,
 	  effortCPU = 1
 	} else if (imgWidth > 1280 && imgHeight < 9360) {
-	  format = 'avif'
-	  compressionQuality *= 0.1
-	  resizeWidth = 960
+	  
+	  compressionQuality *= 0.1,
+	  resizeWidth = 960,
 	  effortCPU = 1
 	} else if (imgWidth > 960 && imgHeight < 2880) {
-	  format = 'avif'
-	  compressionQuality *= 0.1
-	  resizeWidth = 864
+	  
+	  compressionQuality *= 0.1,
+	  resizeWidth = 864,
 	  effortCPU = 1
 	} else {
-	  format = 'avif'
-	  compressionQuality *= 0.1
+	  
+	  compressionQuality *= 0.1,
 	  effortCPU = 1
 	}
 	
