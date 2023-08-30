@@ -3,7 +3,6 @@ const MIN_TRANSPARENT_COMPRESS_LENGTH = MIN_COMPRESS_LENGTH * 20;  // ~20KB
 
 function shouldCompress(originType, originSize, webp) {
 	if ( !originType.startsWith("image") || originSize === 0) return false;
-	/* maybe can save a bit runtime
 	if (webp && originSize < MIN_COMPRESS_LENGTH) return false;
 	if (	// if png or gif image, and size is less than compression limit (also shouldn't be webp)
 		!webp &&
@@ -12,7 +11,6 @@ function shouldCompress(originType, originSize, webp) {
 	) {
 		return false;
 	}
-	*/
 	return true;
 }
 
