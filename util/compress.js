@@ -1,22 +1,35 @@
 const sharp = require("sharp")
 
-function compress(input, webp, grayscale, quality, originSize, metadata) {
-	let format = webp ? 'webp' : 'jpeg'
+function compress(input, avif, grayscale, quality, originSize, metadata) {
+	let format = avif ? 'avif' : 'jpeg'
 	const imgWidth = metadata.width
 	const imgHeight = metadata.height
 	let compressionQuality = quality
 	let resizeWidth = null
 	let resizeHeight = null
-	let effortCPU = 1
+	let effortCPU = 6
 
-	
-	
+	//workaround for webp max res limit && experimental avif compression
+	if (imgHeight > 12480) {	//damn longstrip image
+	  format = 'avif'
+	  compressionQuality *= 0.5
+	  resizeHeight = 12480
+	  effortCPU = 6
+	} else if (imgWidth > 1280 && imgHeight < 9360) {
+	  format = 'avif'
+	  compressionQuality *= 0.5
+	  resizeWidth = 960
+	  effortCPU = 6
+	} else if (imgWidth > 960 && imgHeight < 2880) {
+	  format = 'avif'
+	  compressionQuality *= 0.5
+	  resizeWidth = 864
+	  effortCPU = 6
+	} else {
 	  format = 'webp'
-	  resizeWidth = 480
-	  resizeHeight = 600
-	  compressionQuality *= 0.05
-	  effortCPU = 1
-	
+	  compressionQuality *= 0.5
+	  effortCPU = 6
+	}
 	
         quality = Math.ceil(compressionQuality)
 	
@@ -28,6 +41,7 @@ function compress(input, webp, grayscale, quality, originSize, metadata) {
 		.grayscale(grayscale)
 		.toFormat(format, {
 			quality: quality,
+			preset: 'picture',
 			effort: effortCPU
 		})
 		.toBuffer({resolveWithObject: true})
@@ -50,4 +64,5 @@ function compress(input, webp, grayscale, quality, originSize, metadata) {
 			};
 		});
 }
+
 module.exports = compress;
