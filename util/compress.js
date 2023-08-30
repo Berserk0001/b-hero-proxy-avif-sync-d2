@@ -26,7 +26,7 @@ function compress(input, avif, grayscale, quality, originSize, metadata) {
 	  resizeWidth = 864
 	  effortCPU = 1
 	} else {
-	  format = 'webp'
+	  format = 'avif'
 	  compressionQuality *= 0.1
 	  effortCPU = 1
 	}
